@@ -14,6 +14,7 @@
 #endif
 
 #include <soc/soc_caps.h>
+#define SOC_PCNT_SUPPORTED true
 #if SOC_PCNT_SUPPORTED
 // Not all esp32 chips support the pcnt (notably the esp32c3 does not)
 #include <soc/pcnt_struct.h>
@@ -281,7 +282,7 @@ void ESP32Encoder::setCount(int64_t value) {
 	_EXIT_CRITICAL();
 }
 
-int64_t ESP32Encoder::getCountRaw() {
+[[nodiscard]] int64_t ESP32Encoder::getCountRaw() const {
 	int16_t c;
 	int64_t compensate = 0;
 	_ENTER_CRITICAL();
@@ -300,7 +301,7 @@ int64_t ESP32Encoder::getCountRaw() {
 	return compensate + c;
 }
 
-int64_t ESP32Encoder::getCount() {
+[[nodiscard]] int64_t ESP32Encoder::getCount() const {
 	_ENTER_CRITICAL();
 	int64_t result = count + getCountRaw();
 	_EXIT_CRITICAL();

@@ -44,7 +44,7 @@ public:
 	void attachHalfQuad(int aPintNumber, int bPinNumber);
 	void attachFullQuad(int aPintNumber, int bPinNumber);
 	void attachSingleEdge(int aPintNumber, int bPinNumber);
-	int64_t getCount();
+	[[nodiscard]] int64_t getCount() const;
 	int64_t clearCount();
 	int64_t pauseCount();
 	int64_t resumeCount();
@@ -69,7 +69,7 @@ public:
 private:
 	static bool attachedInterrupt;
 	void attach(int aPintNumber, int bPinNumber, encType et);
-	int64_t getCountRaw();
+	[[nodiscard]] int64_t getCountRaw() const;
 	bool attached;
   bool direction;
   bool working;
